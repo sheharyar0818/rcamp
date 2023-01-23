@@ -1,0 +1,109 @@
+<% layout('layout/boilerplate') %> 
+    
+<!--changed in client side error validations lec-->
+
+ 
+<!-- we have novalidated the form so bootstrap can validate form
+instead of the brower and writen required, valided-form is the name
+of the class which we will also write in boilerplate in js code 
+copied from the boostrap validation form-->
+
+    <div class="row">
+
+        <h1 class="text-center">Edit Campground</h1>
+        <div class="col-md-6 offset-md-3" >
+            <form action="/campgrounds/<%=campground._id%>?_method=PUT" method="POST"  novalidate class="validated-form"
+              enctype="multipart/form-data"> <!--added enctype in adding a upload to edit page lec part 54-->
+                <div class="mb-3" >
+                <label  class="form-label" for="title">Title</label>
+                <input type="text"  class="form-control" id="title" name="campground[title]" 
+                required value="<%= campground.title %>"  >
+                <div class="valid-feedback">
+                    Looks good!
+                  </div>
+            </div>
+                <div class="mb-3" >
+                     <label  class="form-label" for="location">Location</label>
+                    <input type="text" class="form-control"   id="location" name="campground[location]"   
+                    value="<%= campground.location %>" required>
+                    <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                        </div>
+                           
+                      <!--commented  code and added code below in adding a upload to edit page lec part 54-->                               
+                <!-- <div class="mb-3" >
+                 <label  class="form-label" for="image">Image Url</label>
+                   <input type="text" class="form-control"   id="iamge" name="campground[image]" required   >
+                   <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                       </div>
+                       
+                           <!-div class="mb-3" >
+                            <label  class="form-label" for="image"> Add Images</label>
+                              <input type="file" class="form-control"   id="iamge" name="image" multiple >
+                             </div> -->
+                             <!--commented out in cutomizing file input lec at part54 -->
+
+
+
+                                <div class="class mb-3"> -->
+                                <label  class="form-label" for="price"> Campground Price</label>
+                               <div class="input-group mb-3"> 
+                                <span class="input-group-text" id="price-label">$</span>
+                                <input type="text" class="form-control" id="price" placeholder="0.00" aria-label="price-label" aria-describedby="price-label" name="campground[price]" 
+                                 value="<%= campground.price %>" required>
+                                 <div class="valid-feedback">
+                                    Looks good!
+                                  </div>
+                              </div>
+                            </div>
+                               <div class="mb-3" >
+                                <label  class="form-label" for="description">Description</label>
+                               <textarea type="text" class="form-control"   id="description" name="campground[description]"  
+                               required ></textarea><%= campground.description%></textarea>
+                               <div class="valid-feedback">
+                                Looks good!
+                              </div>
+                                   </div>
+
+
+                                    <!--added in cutomizing file input lec @pt54 -->
+                                    
+                                    <div class="mb-3">
+                                      <div class="form-file custom-file">
+                                          <input type="file" class="form-file-input" id="image" name="image" multiple>
+                                          <label class="form-file-label" for="image">
+                                              <span class="form-file-text custom-file-label">Add more image(s)...</span>
+                                              <span class="form-file-button">Browse</span>
+                                          </label>
+                                      </div>
+                                  </div>
+                                        
+                        
+                                   <!--added in Deleting Images Form lec @pt54 -->
+                                   <div class="mb-3">
+                                    <% campground.images.forEach(function(img, i) {  %>
+                                    <img src="<%=img.thumbnail%>" class="img-thumbnail" alt="">
+                                    <div class="form-check-inline">
+                                        <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>">
+                                    </div>
+                                    <label for="image-<%=i%>">Delete?</label>
+                                    <% })%>
+                                </div>
+        
+                        <div class="mb-3" >
+                    <button class="btn btn-info" > Update Campground </button>
+                </div> 
+                </form>
+                    
+                <a href="/campgrounds/<%= campground._id %> ">Back to  Campgrounds</a>                
+        </div>
+        
+        
+        
+        </div>
+        
+        
+        
